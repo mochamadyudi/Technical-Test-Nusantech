@@ -1,0 +1,19 @@
+import React from 'react';
+
+import LottiesMolecul from '../lotties.molecul.tsx'
+import Animation from "../../../assets/lotties/finger.json"
+
+const ContentLoading: React.FC = () => {
+  return (
+    <React.Fragment>
+      <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center">
+        <LottiesMolecul
+          width={250}
+          height={250}
+          animation={Animation} />
+      </div>
+    </React.Fragment>
+  )
+}
+
+export default ContentLoading;

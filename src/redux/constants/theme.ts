@@ -1,0 +1,1 @@
+export const SIDER_COLLAPSE = 'SIDER_COLLAPSE';

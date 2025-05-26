@@ -1,0 +1,36 @@
+.ant {
+  &-breadcrumb {
+
+    ol {
+      li {
+        &:last-child {
+          font-weight: $font-weight-medium;
+          @include themify($themes) {
+            color: themed('bcrumb-color-link');
+          }
+        }
+      }
+    }
+
+    //letter-spacing: -.2px;
+    font-size: $font-size-base;
+    @include themify($themes) {
+      color: themed('bcrumb-color') !important;
+    }
+
+    &-separator {
+      @include themify($themes) {
+        color: themed('bcrumb-color') !important;
+      }
+    }
+
+    //&-link {
+    //  &:last-child {
+    //    @include themify($themes) {
+    //      color: themed('bcrumb-color-link');
+    //    }
+    //  }
+    //
+    //}
+  }
+}

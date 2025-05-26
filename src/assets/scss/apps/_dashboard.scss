@@ -1,0 +1,121 @@
+.dashboard{
+  &-logo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .ant{
+      &-typography{
+        font-size: 1.5rem !important;
+        font-weight: 600;
+      }
+    }
+  }
+  &-top{
+    &-left, &-right{
+      transition: .2s;
+      padding: 0 $padding-content;
+    }
+    &-left{
+      width: $sider-width;
+    }
+    &-right{
+      flex:1;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+    }
+  }
+  &-header{
+    transition: .2s;
+    @include themify($themes){
+      background: themed('bg-header');
+      box-shadow: 0 0 10px darken(themed('bg-header'), 5) !important;
+    }
+
+    height: $height-header !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: $zIndexHeader + 1;
+    padding: 0 !important;
+
+    &-nav{
+      width: 100%;
+      display: flex;
+      height: 100%;
+    }
+
+    &.has-sider-collapsed{
+      transition: .2s;
+      .dashboard-top{
+        &-left{
+          transition: .2s;
+          width: $sider-width-collapse;
+        }
+      }
+    }
+  }
+  &-sider{
+    position: fixed;
+    top: $height-header !important;
+    left: 0;
+    z-index: $zIndexHeader;
+    width: $sider-width !important;
+    min-width: $sider-width !important;
+    max-width: $sider-width !important;
+    height: calc(100vh - $height-header);
+
+
+    @include themify($themes){
+      background: themed('bg-sider') !important;
+    }
+    &.ant-layout{
+      &-sider{
+        &-collapsed{
+          width: $sider-width-collapse !important;
+          min-width: $sider-width-collapse !important;
+          max-width: $sider-width-collapse !important;
+
+          .dashboard{
+            &-main{
+              ~ .ant-layout{
+                &-content{
+                  position: relative;
+                  padding: $padding-content;
+                  margin-left: $sider-width-collapse !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &-main{
+    margin-top: $height-header;
+    @include themify($themes){
+      background: themed('bg-main') !important;
+    }
+    &.ant-layout-has-sider{
+      .ant-layout{
+        &-content{
+          transition: .2s;
+          margin-left: $sider-width !important;
+          &.has-collapsed{
+            margin-left: $sider-width-collapse !important;
+          }
+        }
+      }
+    }
+    .ant-layout{
+      &-content{
+        position: relative;
+        padding: $padding-content;
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+$typography_size: (
+  h1: $font-size-3xl,
+  h2:$font-size-2xl,
+  h3:$font-size-xl,
+  h4:$font-size-lg,
+  h5:$font-size-base,
+  h6:$font-size-base,
+  div: $font-size-base,
+  article: $font-size-base,
+  p: $font-size-base,
+  span: $font-size-base,
+  a: $font-size-base,
+);
+$typography_family: (
+  h1:'sf-pro-medium',
+  h2:'sf-pro-medium',
+  h3:'sf-pro-medium',
+  h4:'sf-pro-medium',
+  h5:'sf-pro-medium',
+  h6:'sf-pro-medium',
+  div: 'sf-pro-regular',
+  article: 'sf-pro-regular',
+  p: 'sf-pro-regular',
+  span: 'sf-pro-regular',
+);
+$typography_weight: (
+  h1: $font-weight-extrabold,
+  h2: $font-weight-bold,
+  h3: $font-weight-bold,
+  h4: $font-weight-semibold,
+  h5: $font-weight-semibold,
+  h6: $font-weight-semibold,
+  div: $font-weight-medium,
+  article: $font-weight-medium,
+  p: $font-weight-medium,
+  span: $font-weight-medium,
+);
+$typography_color: (
+  h1: 'text',
+  h2:'text',
+  h3:'text',
+  h4:'text',
+  h5:'text',
+  h6:'text',
+  div: 'paragraph',
+  article: 'paragraph',
+  p: 'paragraph',
+  span: 'paragraph',
+);
+
+@each $el, $value in $typography_size {
+  #{$el} {
+    &.ant {
+      &-typography {
+        font-size: $value;
+        //margin: 0;
+        padding: 0;
+      }
+    }
+
+  }
+}
+
+@each $el, $value in $typography_color {
+  #{$el} {
+    font-family: map-get($typography_family,$el), "sans-serif", system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji" !important;
+    font-weight: map-get($typography_weight, $el) !important;
+    &.ant {
+      &-typography {
+        font-family: map-get($typography_family,$el), "sans-serif", system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji" !important;
+        font-weight: map-get($typography_weight, $el) !important;
+        letter-spacing: -0rem !important;
+
+        &-ellipsis {
+          @include themify($themes) {
+            color: themed($value);
+          }
+        }
+
+        @include themify($themes) {
+          color: themed($value);
+
+          span {
+            color: themed($value);
+          }
+        }
+      }
+    }
+
+  }
+}

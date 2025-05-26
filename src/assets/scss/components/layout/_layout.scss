@@ -1,0 +1,95 @@
+.ant {
+  &-layout {
+    @include themify($themes) {
+      background: themed('card-background');
+    }
+    &-sider{
+      @include themify($themes) {
+        background: themed('sider-background') !important;
+        border-right: 1px solid darken(themed('sider-background'), 2);
+      }
+    }
+    &-content {
+      @include themify($themes) {
+        background: themed('body');
+      }
+    }
+  }
+}
+
+.ant{
+  &-app{
+    &-rtl{
+      .inner{
+        &-layout{
+          &-sider{
+            .ant{
+              &-menu{
+                border-left: 1px solid;
+                border-right-style: none !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.inner{
+  &-layout{
+    @apply rounded-lg overflow-hidden bg-transparent flex-1;
+
+    @include themify($themes) {
+      background: themed('sider-background') !important;
+      border-color: darken(themed('sider-background'), 2);
+    }
+    &-sider{
+      @apply bg-transparent;
+
+      @include ant-menus;
+
+      .ant{
+        &-menu{
+          @apply h-full;
+          @include themify($themes) {
+            background: themed('sider-background');
+            border-color: darken(themed('sider-background'), 2);
+          }
+        }
+      }
+    }
+    &-content{
+      @apply p-6;
+
+      &.mobile{
+        @apply px-6 pt-2;
+      }
+
+      @include themify($themes) {
+        background: themed('sider-background') !important;
+      }
+    }
+  }
+}
+
+.bg{
+  &-body{
+    @include themify($themes){
+      background: themed('body');
+    }
+  }
+}
+
+.app{
+  &-fullscreen{
+    @apply flex flex-col h-full;
+
+    &.active{
+      @apply fixed left-0 top-0 w-full min-h-screen;
+      padding: $padding-content;
+      z-index: $zIndexDanger;
+    }
+
+  }
+}

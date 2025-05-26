@@ -1,0 +1,178 @@
+.ant{
+  &-menu{
+    &-item{
+      @extend %font-default;
+      @include divider();
+    }
+  }
+}
+
+
+%font-default{
+  font-family:  'sf-pro-medium', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji" !important;
+  font-weight: $font-weight-semibold !important;
+  letter-spacing: 0.022rem !important;
+  font-size: $font-size-sm;
+}
+%menu-color-default{
+  @extend %font-default;
+
+  @include themify($themes){
+
+    color: themed('menu-item');
+  }
+}
+//.ant-menu-css-var{
+//  --ant-menu-sub-menu-item-selected-color: red !important;
+//
+//}
+@mixin submenu {
+  .ant {
+    &-menu {
+      &-submenu{
+        &-selected{
+          .ant-menu{
+            &-sub{
+              .ant-menu{
+                &-item{
+                  &-active{
+                    @extend %ant-menu-active;
+
+                    .ant-menu-submenu{
+                      &-title{
+                        @extend %ant-menu-active;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            &-submenu{
+              &-title{
+                span {
+                  @include themify($themes){
+                    color: themed('menu-sub-title-active') !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      &-sub {
+        @include themify($themes) {
+          background: themed('menu-sub') !important;
+        }
+
+      }
+    }
+  }
+
+}
+@mixin ant-menus{
+  .ant {
+    &-menu {
+      //@apply w-full;
+      &-item{
+        &-extra{
+          .ant{
+            &-tag{
+              padding: 2px 6px !important;
+              span{
+                font-size: $font-size-xs !important;
+              }
+            }
+          }
+
+        }
+      }
+      &-title-content, &-item-group-title{
+        @extend %font-default;
+        span, a{
+          @extend %font-default;
+        }
+      }
+
+      &-item, &-submenu-title{
+        border-radius: 0 !important;
+        margin: 0 !important;
+        margin-bottom: 5px !important;
+        width: 100%;
+      }
+
+
+      &-root{
+        padding: 5px 0;
+      }
+      &-item, &-submenu{
+        &:not(&.ant-menu-item-active &.ant-menu-item-selected){
+          .ant-menu-title-content, .anticon{
+            @extend %menu-color-default;
+          }
+        }
+
+      }
+      &-item{
+        &:where(&.ant-menu-item-active){
+          .ant-menu{
+            &-submenu-title,&-item-icon, &-title-content{
+              @include themify($themes){
+                color: themed('menu-active') !important;
+              }
+            }
+          }
+          @include themify($themes){
+            background: themed('menu-active-bg') !important;
+          }
+
+          &:hover{
+            @include themify($themes){
+              background: themed('menu-active-bg-hover') !important;
+            }
+          }
+          &:before{
+            content: '';
+            position: absolute;
+            right: 0;
+            height: 100%;
+            width: 2px;
+
+            @include themify($themes){
+              background: themed('menu-active-before') !important;
+            }
+          }
+        }
+
+        &-selected{
+          &:not(.ant-menu-item-active){
+
+            @include themify($themes){
+              background: themed('menu-active-selected-only') !important;
+              color: themed('menu-active-selected-color-only') !important;
+            }
+
+          }
+        }
+      }
+      &-item {
+        &-icon {
+          font-size: $font-size-base !important;
+        }
+
+        &-group {
+          margin-bottom: 15px;
+
+          &-title {
+            @include themify($themes){
+              color: themed('menu-group') !important;
+              @extend %font-default;
+            }
+            margin-top: 10px;
+            padding-left: 23px;
+            font-size: $font-size-sm !important;
+          }
+        }
+      }
+    }
+  }
+}

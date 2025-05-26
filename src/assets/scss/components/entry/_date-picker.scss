@@ -1,0 +1,79 @@
+.ant{
+  &-picker{
+
+    &-input{
+      @include themify($themes) {
+        &::placeholder {
+          color: themed('text-placeholder');
+        }
+      }
+
+    }
+    &-outlined{
+      border-width: var(--ant-line-width);
+      border-style: var(--ant-line-type);
+      @include themify($themes) {
+        border-color: themed('input-border');
+
+      }
+      @include themify($themes) {
+        background: themed('input-background');
+      }
+    }
+    &-arrow{
+
+      svg {
+        height: $font-size-xs;
+        width: $font-size-xs;
+
+        @include themify($themes){
+          fill: themed('paragraph');
+        }
+      }
+    }
+
+    &-cell{
+      @include themify($themes){
+        color: themed('input-text-disabled');
+      }
+
+      &-in-view{
+        @include themify($themes){
+          color: themed('text');
+        }
+      }
+    }
+    &-date{
+      &-panel{
+        .ant-picker{
+          &-header{
+            @apply px-4 py-2;
+          }
+        }
+      }
+    }
+    &-panel{
+      &-layout{
+
+      }
+      &-container{
+        @include themify($themes) {
+          background: themed('input-background');
+        }
+      }
+
+    }
+    &-dropdown{
+
+    }
+    &-selection{
+      &-item{
+        font-size: $font-size-base;
+        @include themify($themes){
+          color: themed('paragraph') !important;
+        }
+      }
+    }
+  }
+
+}

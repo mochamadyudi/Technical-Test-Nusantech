@@ -1,0 +1,29 @@
+.ant {
+  &-descriptions {
+    &-item {
+      &-content {
+        @include themify($themes) {
+          color: themed('text-label-value') !important
+        }
+      }
+
+      &-label {
+        //font-weight: 500 !important;
+        min-width: 70px;
+        @include themify($themes) {
+          color: themed('text-label') !important
+        }
+
+        &:after{
+          margin-left: auto !important;
+          margin-right: var(--ant-descriptions-colon-margin-right) !important;
+        }
+      }
+
+      padding-bottom: 5px !important;
+    }
+
+    &-view {
+    }
+  }
+}

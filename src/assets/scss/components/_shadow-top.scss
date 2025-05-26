@@ -1,0 +1,21 @@
+.dark{
+  .shadow-outer-top{
+    &:before{
+      @media screen and (min-width: $breakpoints-base){
+        background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,1) 100%) !important;
+      }
+    }
+  }
+}
+.shadow-outer-top{
+  &:before{
+    @media screen and (min-width: $breakpoints-base){
+      @apply absolute w-full left-0;
+      content: "";
+      top: -200px;
+      height: 200px;
+      z-index: 200;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgb(255, 255, 255) 100%);
+    }
+  }
+}

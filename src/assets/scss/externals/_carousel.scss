@@ -1,0 +1,67 @@
+@mixin slick-shadow-wrapper($type){
+  @apply absolute top-0 w-2/5 z-10;
+  @content;
+  content: '';
+  z-index: 5;
+  height: 100%;
+}
+
+.dark{
+  .slick{
+    &-list{
+      &:before{
+        @include slick-shadow-wrapper('left'){
+          @apply left-0;
+          background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(0,212,255,0) 100%);
+        }
+      }
+      &:after{
+        @include slick-shadow-wrapper('right'){
+          @apply right-0;
+          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(0, 0, 0) 100%);
+        }
+      }
+    }
+  }
+}
+
+.slick{
+  &-list{
+    @apply  w-full relative;
+    &:before{
+      @include slick-shadow-wrapper('left'){
+        @apply left-0;
+        background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgba(0,212,255,0) 100%);
+      }
+
+    }
+    &:after{
+      @include slick-shadow-wrapper('right'){
+        @apply right-0;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 1) 100%);
+      }
+
+    }
+  }
+  &-slide{
+    @apply flex items-center justify-center relative;
+    > div {
+      @apply flex items-center justify-center;
+    }
+    img{
+      transition:.2s;
+      filter: grayscale(0) !important;
+    }
+    &.slick{
+      &-current{
+        img{
+          transition: .2s;
+          filter: grayscale(2) !important;
+        }
+      }
+    }
+  }
+  &-list{
+    @apply w-full;
+  }
+}

@@ -1,0 +1,1 @@
+import{be as e,R as t,bf as n,bg as s,b3 as a}from"./main-DDx3HHTA.js";function i(){return e.jsxs(t.Fragment,{children:[e.jsx(n.Title,{level:1,children:"Home"}),e.jsx(s,{to:"/auth/login",children:e.jsx(a,{children:"Login"})})]})}export{i as default};

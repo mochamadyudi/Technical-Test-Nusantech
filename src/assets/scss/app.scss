@@ -1,0 +1,13 @@
+@import "antd/dist/reset.css";
+@import "./settings";
+@import './externals';
+@import "components";
+@import "apps";
+
+
+.app{
+  min-height: 100vh;
+}
+.dashboard{
+  min-height: 100vh;
+}

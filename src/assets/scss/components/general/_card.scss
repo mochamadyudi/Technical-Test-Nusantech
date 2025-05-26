@@ -1,0 +1,38 @@
+$card-height: (
+  default: 200px,
+  small: 150px,
+  medium: 250px,
+  large: 300px,
+);
+
+.yid{
+  &-card{
+    @apply w-full border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden relative top-0;
+    transition:.2s;
+    &:hover{
+      @apply -top-4 relative;
+      transition:.2s;
+
+      img{
+        transition: all .2s;
+        transform: scale(1.1);
+      }
+    }
+    &-thumb{
+      @apply w-full relative flex flex-col ;
+      height: map-get($card-height, 'default');
+      position: relative;
+      img{
+        width: 100% !important;
+        height: map-get($card-height, 'default') !important;
+        transition: all .2s;
+        transform: scale(1);
+        object-fit: cover!important;
+        object-position: center;
+      }
+    };
+    &-content{
+      @apply p-4;
+    }
+  }
+}

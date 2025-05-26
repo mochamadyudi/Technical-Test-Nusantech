@@ -1,0 +1,14 @@
+.yid{
+  &-affix{
+    @apply h-full relative;
+    &-content{
+      @apply relative transition duration-200;
+      @apply sticky left-0 right-0;
+      z-index: $zIndexPrimary;
+      &.active{
+        @apply sticky left-0 right-0;
+        z-index: $zIndexPrimary;
+      }
+    }
+  }
+}

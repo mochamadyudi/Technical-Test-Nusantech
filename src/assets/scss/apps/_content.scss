@@ -1,0 +1,24 @@
+
+$font_size_ql: (
+  small: 12px,
+  large: 20px,
+  huge: 26px,
+);
+
+.h{
+  &-content{
+    &-screen{
+      height: 100%;
+    }
+  }
+}
+
+.ql{
+  &-size{
+    @each $key, $value in $font_size_ql{
+      &-#{$key}{
+        font-size: $value !important;
+      }
+    }
+  }
+}

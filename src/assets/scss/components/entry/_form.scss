@@ -1,0 +1,325 @@
+.ant {
+  &-form {
+    &-item {
+      &-feedback {
+        &-icon {
+          @each $key, $value in $antd-color-status {
+            &-#{$key} {
+              .anticon {
+                color: $value !important;
+                fill: $value !important;
+              }
+
+            }
+          }
+        }
+      }
+      &-label {
+        label {
+          font-family: sf-pro-medium, sans-serif;
+          font-size: $font-size-base !important;
+          @include themify($themes) {
+            color: themed('text');
+          }
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+.ant {
+
+  &-input-number {
+    @apply w-full;
+    &-prefix{
+      @include themify($themes) {
+        color: themed('text') !important;
+        svg {
+          fill: themed('text');
+        }
+      }
+    }
+    &-affix-wrapper {
+      @apply w-full;
+      @include themify($themes) {
+        background: themed('input-background');
+      }
+    }
+
+    &-status-error {
+      @include themify($themes) {
+        background: themed('input-background') !important;
+      }
+    }
+
+    &-input {
+      @include themify($themes) {
+        color: themed('text');
+      }
+    }
+
+    &-input-wrap {
+      border-color: var(--ant-input-number-active-border-color) !important;
+    }
+
+    &:hover {
+      border-color: var(--ant-input-number-active-border-color) !important;
+    }
+
+    &-focused {
+      border-color: var(--ant-input-number-active-border-color) !important;
+    }
+
+    &-outlined {
+      border-width: var(--ant-line-width);
+      border-style: var(--ant-line-type);
+      @include themify($themes) {
+        border-color: themed('input-border');
+      }
+
+      &:hover {
+        border-color: var(--ant-input-number-active-border-color) !important;
+      }
+    }
+
+    @include themify($themes) {
+      background: themed('input-background');
+      color: themed('text');
+
+      &::placeholder {
+        color: themed('text-placeholder');
+      }
+    }
+  }
+
+  &-input {
+    &-clear {
+      &-icon {
+        &-has-suffix {
+          @include themify($themes) {
+            color: themed('text');
+            svg {
+              fill: lighten(themed('text'), 30) !important;
+            }
+          }
+        }
+
+      }
+    }
+
+    font-size: $font-size-base;
+
+    &-suffix, &-prefix {
+      @include themify($themes) {
+        color: themed('text');
+        svg {
+          fill: themed('text');
+        }
+      }
+    }
+
+    &-bordered, &-outlined {
+      border-width: var(--ant-line-width);
+      border-style: var(--ant-line-type);
+      @include themify($themes) {
+        border-color: themed('input-border');
+      }
+
+      &:focus {
+        border-color: var(--ant-input-active-border-color);
+      }
+
+      &:hover {
+        border-color: var(--ant-input-hover-border-color);
+      }
+    }
+
+    &-affix {
+      &-wrapper {
+        &-disabled {
+          @include themify($themes) {
+            background: themed('input-background-disabled');
+            color: themed('input-text-disabled');
+          }
+          user-select: none !important;
+        }
+
+        @include themify($themes) {
+          background: themed('input-background');
+          color: themed('text');
+
+          &::placeholder {
+            color: themed('text-placeholder');
+          }
+        }
+
+        &-focused {
+          //border: inherit ;
+        }
+      }
+    }
+
+    &-status{
+      @each $key, $value in $antd-color-status{
+        &-#{$key}{
+          border-color: unset;
+          @include themify($themes) {
+            background: themed('input-background');
+          }
+        }
+      }
+    }
+    &-disabled{
+      @include themify($themes) {
+        background: themed('input-background-disabled');
+        color: themed('input-text-disabled') !important;
+      }
+      user-select: none !important;
+    }
+
+    @include themify($themes) {
+      background: themed('input-background');
+      color: themed('text');
+
+      &::placeholder {
+        color: themed('text-placeholder');
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  &-select {
+    &-selection {
+      &-placeholder {
+        @include themify($themes) {
+          color: themed('text-placeholder');
+        }
+      }
+    }
+
+    &.ant-select {
+      &-status {
+        @each $key, $value in $antd-color-status {
+          @if ($key != 'success') {
+            &-#{$key} {
+              .ant-select {
+                &-selector {
+                  border: .5px var(--ant-line-type) $value;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    &-disabled {
+      .ant {
+        &-select {
+          &-selector {
+            @include themify($themes) {
+              background: themed('input-background-disabled');
+              color: themed('input-text-disabled');
+            }
+          }
+        }
+      }
+
+      user-select: none;
+    }
+
+    &-item {
+      &-option {
+        &-selected {
+          @include themify($themes) {
+            color: themed('text');
+          }
+        }
+      }
+
+      @include themify($themes) {
+        color: themed('text');
+      }
+    }
+
+    &-dropdown {
+      [role="listbox"] {
+      }
+
+      @include themify($themes) {
+        background: themed('input-background');
+        color: themed('text');
+      }
+    }
+
+    &-selector {
+      &:where(:not(.ant-select-focus)) {
+        @include themify($themes) {
+          border-color: themed('input-border');
+        }
+      }
+    }
+
+    &-selection {
+      &-placeholder {
+        font-size: $font-size-sm;
+      }
+
+      &-search {
+
+        &-input {
+          font-size: $font-size-sm;
+          @include themify($themes) {
+            color: themed('text');
+            &::placeholder {
+              font-size: $font-size-sm;
+              color: themed('text-placeholder') !important;
+            }
+          }
+        }
+      }
+    }
+
+    &-arrow {
+      @include themify($themes) {
+        color: themed('text') !important;
+        font-size: $font-size-base;
+      }
+    }
+
+    &-selector {
+
+      @include themify($themes) {
+        background: themed('input-background') !important;
+        color: themed('text') !important;
+
+        &::placeholder {
+          color: themed('text-placeholder');
+        }
+      }
+    }
+  }
+}
+
+.dark {
+  .ant {
+    &-select {
+      &-item {
+        &-option {
+          &-selected {
+
+          }
+        }
+      }
+    }
+  }
+}
+
+//setting border radius
+.ant {
+  &-input, &-input-affix-wrapper, &-select-selector, &-select {
+    border-radius: $input-border-radius;
+  }
+}

@@ -1,0 +1,26 @@
+.page-header{
+  &-heading{
+    position: relative;
+    top: -$padding-content;
+    left: -$padding-content;
+
+    width: calc(100% + ($padding-content*2));
+    padding: $padding-content;
+    @include themify($themes){
+      background: themed('bg-header');
+    }
+  }
+  &-content{
+    position: relative;
+    top: -$padding-content;
+  }
+  &.has-container{
+    .page-header{
+      &-alt, &-content{
+        width: 100%;
+        margin: 0 auto;
+        max-width: $breakpoints-xl;
+      }
+    }
+  }
+}

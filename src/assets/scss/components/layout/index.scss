@@ -1,0 +1,58 @@
+@import "layout";
+@import "divider";
+
+@each $key, $value in $themes {
+  html{
+    &.#{$key}{
+      body{
+        background: map-get($value, 'bg-layout') !important;
+      }
+    }
+  }
+}
+
+
+.app{
+  @apply min-h-screen #{!important};
+
+  @include themify($themes){
+    background: themed('bg-layout') !important;
+  }
+
+  .ant{
+    &-layout{
+      @include themify($themes){
+        background: themed('bg-layout');
+      }
+    }
+  }
+  &-main{
+    @apply relative z-0 min-h-screen #{!important};
+    padding-top: $height-header;
+    @include themify($themes){
+      background: themed('bg-layout') !important;
+    }
+  }
+  &-footer{
+    padding: 0 !important;
+    @include themify($themes){
+      background: themed('bg-footer') !important;
+    }
+  }
+  &-header {
+    @apply p-0 #{!important};
+    z-index: $zIndexHeader;
+    height: $height-header !important;
+  }
+
+  .ant{
+    &-layout{
+      &-header{
+        @apply fixed top-0 left-0 w-full #{!important};
+        @include themify($themes){
+          background: themed('bg-header');
+        }
+      }
+    }
+  }
+}
