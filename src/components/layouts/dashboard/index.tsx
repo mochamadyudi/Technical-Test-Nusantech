@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PageLoading from '../../molecul/loading/page.loading.tsx'
 import TheBreadCrumbsDashboard from './TheBreadCrumbs.dashboard.tsx'
+import WrapperLayout from '../wrapper.layout.tsx'
 
 interface DashboardProps {
   children?: ReactNode;
@@ -27,7 +28,7 @@ class Dashboard extends React.Component<DashboardProps>{
     }
 
     return (
-      <React.Fragment>
+      <WrapperLayout>
         <Layout className="dashboard">
           <Dashboard.Header />
           <Layout className="dashboard-main">
@@ -37,7 +38,7 @@ class Dashboard extends React.Component<DashboardProps>{
             </Layout.Content>
           </Layout>
         </Layout>
-      </React.Fragment>
+      </WrapperLayout>
     )
   }
 }

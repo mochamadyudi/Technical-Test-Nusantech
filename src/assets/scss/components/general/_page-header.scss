@@ -1,4 +1,11 @@
 .page-header{
+  &-alt{
+    @apply flex items-start py-6;
+
+    &-content{
+      @apply flex-1;
+    }
+  }
   &-heading{
     position: relative;
     top: -$padding-content;

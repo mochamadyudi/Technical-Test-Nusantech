@@ -1,15 +1,14 @@
 import React from 'react';
-import { Button, Typography } from "antd";
-import { Link } from 'react-router-dom'
+import HeroSection from '@components/partials/Home/hero.section.tsx';
+import MovieCategoryTab from "@partials/Home/movie-category.tab.tsx";
 
-export default function Page(){
-
+export default function Page() {
   return (
     <React.Fragment>
-      <Typography.Title level={1}>Home</Typography.Title>
-      <Link to={"/auth/login"}>
-        <Button>Login</Button>
-      </Link>
+      <div className="app-page-full">
+        <HeroSection/>
+        <MovieCategoryTab/>
+      </div>
     </React.Fragment>
   )
 }

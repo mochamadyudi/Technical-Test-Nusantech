@@ -108,32 +108,6 @@ export default {
       '2xl': '40px',
       '3xl': '64px',
     },
-    borderColor: ({ theme }) => ({
-      ...theme('colors'),
-      DEFAULT: theme('colors.gray.200', 'currentColor'),
-    }),
-    borderOpacity: ({ theme }) => theme('opacity'),
-    borderRadius: {
-      none: '0px',
-      sm: '0.125rem',
-      DEFAULT: '0.25rem',
-      md: '0.375rem',
-      lg: '0.5rem',
-      xl: '0.75rem',
-      '2xl': '1rem',
-      '3xl': '1.5rem',
-      full: '9999px',
-    },
-    borderSpacing: ({ theme }) => ({
-      ...theme('spacing'),
-    }),
-    borderWidth: {
-      DEFAULT: '1px',
-      0: '0px',
-      2: '2px',
-      4: '4px',
-      8: '8px',
-    },
     boxShadow: {
       sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
       DEFAULT: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',

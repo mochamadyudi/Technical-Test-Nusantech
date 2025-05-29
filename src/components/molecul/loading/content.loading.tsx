@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LottiesMolecul from '../lotties.molecul.tsx'
-import Animation from "../../../assets/lotties/finger.json"
+import Animation from "../../../assets/lotties/loading-spinner-dots.json"
 
 const ContentLoading: React.FC = () => {
   return (

@@ -1,4 +1,3 @@
-export const API_URL = import.meta.env.API_URL
-export const API_VERSION = import.meta.env.API_VERSION
-
 export const TOKEN_METADATA = '@@token';
+export const REQUEST_TOKEN_METADATA= '@@token.request';
+export const SESSION_ID_METADATA = '@@session.id';

@@ -1,21 +1,15 @@
-'use server'
 import '@ant-design/v5-patch-for-react-19';
 import React, { Suspense } from 'react'
-import { IntlProvider } from 'react-intl'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { connect, useSelector } from 'react-redux'
-import AppLocale from '../assets/Lang'
 import moment from 'moment'
 import { App, ConfigProvider, Layout, Result, theme } from 'antd'
-import dashboardRoutes from '../configs/dashboard.route.tsx'
-import { BasicRouteType, MenuItemCompound } from 'types/global'
-import ContentLoading from '../components/molecul/loading/content.loading.tsx'
-import Dashboard from '../components/layouts/dashboard'
-import InitiationFetching from '../components/utils-components/initiation-fetching.tsx'
-import Middleware from '../middleware'
-import BlankLayout from '../components/layouts/blank.layout.tsx'
-import publicRoute from '../configs/route/public.route.tsx'
-import authRoute from '../configs/route/auth.route.tsx'
+import { BasicRouteType, MenuItemCompound } from '@/types/global'
+import ContentLoading from '@components/molecul/loading/content.loading.tsx'
+import InitiationFetching from '@components/utils-components/initiation-fetching.tsx'
+import Middleware from '@middleware'
+import publicRoute from '@/config/route/public.route.tsx'
+import ThePageLayout from '@components/layouts/page/ThePage.layout.tsx'
 
 moment.locale('id')
 
@@ -73,13 +67,7 @@ const ViewRouter = connect(({ auth }: any) => {
   return (
     <Router>
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />}>
-          {renderRoutes(dashboardRoutes, <ContentLoading />)}
-        </Route>
-        <Route path="/auth" element={<BlankLayout />}>
-          {renderRoutes(authRoute, <ContentLoading />)}
-        </Route>
-        <Route path="/" element={<BlankLayout />}>
+        <Route path="/" element={<ThePageLayout />}>
           {renderRoutes(publicRoute, <ContentLoading />)}
         </Route>
         <Route
@@ -97,28 +85,21 @@ const ViewRouter = connect(({ auth }: any) => {
 
 const Views: React.FC = () => {
   const state: { theme: any } = useSelector((state: any) => state)
-
-  const currentAppLocale = AppLocale['en']
   return (
     <App className="app">
-      <IntlProvider
-        locale={currentAppLocale?.locale}
-        messages={currentAppLocale?.messages}
+      <ConfigProvider
+        theme={{
+          ...state?.theme,
+          algorithm:
+            state?.theme?.currentTheme === 'dark'
+              ? theme.darkAlgorithm
+              : theme.defaultAlgorithm,
+        }}
       >
-        <ConfigProvider
-          theme={{
-            ...state?.theme,
-            algorithm:
-              state?.theme?.currentTheme === 'dark'
-                ? theme.darkAlgorithm
-                : theme.defaultAlgorithm,
-          }}
-        >
-          <InitiationFetching>
-            <ViewRouter />
-          </InitiationFetching>
-        </ConfigProvider>
-      </IntlProvider>
+        <InitiationFetching>
+          <ViewRouter />
+        </InitiationFetching>
+      </ConfigProvider>
     </App>
   )
 }

@@ -1,20 +1,10 @@
 import qs from 'qs';
-import axios from 'axios';
-import { APP_CONFIG } from './app.config.ts';
-import HttpUtil from '../utils/http.util.ts';
+import axios, { InternalAxiosRequestConfig } from 'axios'
 import { message } from 'antd';
-
-const headers = {}
-
-if (HttpUtil.getToken('get')){
-  Reflect.set(headers, 'Authorization', 'Bearer ' + HttpUtil.getToken('get'));
-}
+import { APP_CONFIG } from './app.config.ts'
 
 const Interceptors = axios.create({
-  baseURL: APP_CONFIG.VITE_API_URL,
-  headers: {
-    ...headers,
-  },
+  baseURL: import.meta.env.VITE_API_URL,
   paramsSerializer: (param) => {
     return qs.stringify(param)
   },
@@ -23,15 +13,20 @@ const Interceptors = axios.create({
 //@ts-ignore
 Interceptors.isCancel = axios.isCancel;
 
+Interceptors.interceptors.request.use((config: InternalAxiosRequestConfig)=> {
+  if(APP_CONFIG.VITE_TMDB_ACCESS_TOKEN){
+    Reflect.set(config.headers, 'Authorization', `Bearer ${APP_CONFIG.VITE_TMDB_ACCESS_TOKEN}`);
+  }
+  return config;
+})
 Interceptors.interceptors.response.use(
   (res) =>
     new Promise((resolve, _) => {
-      resolve(res?.data)
+      resolve(res);
     }),
 
   (err) => {
     if (!err.response) {
-
       if (err?.isAxiosError) {
         message.error({
           key: 'error-axios',
@@ -48,10 +43,9 @@ Interceptors.interceptors.response.use(
       return new Promise((_, reject) => {
         reject({...err})
       })
-      // store.dispatch(signOut())
     } else {
-      return new Promise((_, reject) => {
-        reject({...err?.response?.data})
+      return new Promise((_) => {
+        _({...err?.response?.data})
       })
     }
   }

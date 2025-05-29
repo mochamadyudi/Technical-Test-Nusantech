@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 const BlankLayout: React.FC = () => {
   return (
-    <Layout className="!min-h-screen w-full border border-red-500 !flex !flex-col">
+    <Layout className="!min-h-screen w-full !flex !flex-col">
       <Outlet/>
     </Layout>
   )

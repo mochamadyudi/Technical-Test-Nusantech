@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from 'antd'
+import { Flex, Typography, Image } from 'antd'
 import Dashboard from '../../layouts/dashboard'
 
 type PageHeaderOptions = {
@@ -7,10 +7,7 @@ type PageHeaderOptions = {
   addonBefore?: React.ReactNode;
   extra?: React.ReactNode;
   breadcrumbs?: boolean;
-  thumbnail?: string | {
-    src: string;
-  }
-
+  thumbnail?: string;
 }
 export interface PageHeaderProps {
   title: string;
@@ -27,12 +24,32 @@ const PageHeader: React.FC<PageHeaderProps> = ({container = false, ...props}) =>
       ].join(' ')}>
         <div className="page-header-heading">
           <div className="page-header-alt">
-            <div className="space-y-2">
+            <div className="page-header-alt-content space-y-2">
               <div>
-                {props?.options?.addonBefore}
-                <Typography.Title level={1} className="!m-0 !text-2xl">{props?.title}</Typography.Title>
-                <Dashboard.Breadcrumbs/>
-                {props?.options?.addonAfter}
+
+                <Flex align="start" gap={30}>
+                  {
+                    props?.options?.thumbnail && (
+                      <Image
+                        src={props?.options?.thumbnail as string}
+                        alt={props?.options?.thumbnail}
+                        preview={true}
+                        className="w-32 h-32 rounded-full object-cover"
+                        wrapperClassName="overflow-hidden h-32 w-32 rounded-full"
+                      />
+                    )
+                  }
+                  <div className="flex-1">
+                    {props?.options?.addonBefore}
+                    <Typography.Title level={1} className="!m-0 !text-2xl">{props?.title}</Typography.Title>
+                    {
+                      props?.options?.breadcrumbs && (
+                        <Dashboard.Breadcrumbs/>
+                      )
+                    }
+                    {props?.options?.addonAfter}
+                  </div>
+                </Flex>
               </div>
             </div>
             {
@@ -42,10 +59,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({container = false, ...props}) =>
                 </div>
               )
             }
-
           </div>
         </div>
-
         <div className="page-header-content">
           {props?.children}
         </div>

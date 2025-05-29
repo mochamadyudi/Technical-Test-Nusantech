@@ -1,4 +1,4 @@
-import routes from '../../configs/dashboard.route.tsx'
+import routes from '../../configs/route/private.route.tsx'
 import { ActionRedux, MenuItemCompound } from '../../types/global'
 import { ACT_FAILURE, ACT_SUCCESS } from '../constants/action.ts'
 import { AUTHORIZATION } from '../constants/auth.constant.ts'

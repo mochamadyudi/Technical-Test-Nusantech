@@ -11,7 +11,6 @@
 %font-default{
   font-family:  'sf-pro-medium', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji" !important;
   font-weight: $font-weight-semibold !important;
-  letter-spacing: 0.022rem !important;
   font-size: $font-size-sm;
 }
 %menu-color-default{
@@ -19,7 +18,7 @@
 
   @include themify($themes){
 
-    color: themed('menu-item');
+    color: themed('menu-item') !important;
   }
 }
 //.ant-menu-css-var{

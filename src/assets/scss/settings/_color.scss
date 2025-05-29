@@ -4,9 +4,16 @@ $bg-footer: #fff;
 $bg-sider: #fff;
 
 
-$bg-dark-header: #283142;
-$bg-dark-main: #1b2531;
-$bg-dark-layout: #1b2531;
+//$bg-dark-header: #283142;
+//$bg-dark-main: #1b2531;
+//$bg-dark-layout: #1b2531;
+//$bg-dark-footer: #283142;
+//$bg-dark-sider: #283142;
+
+
+$bg-dark-header: #000000;
+$bg-dark-main: #000000;
+$bg-dark-layout: #000000;
 $bg-dark-footer: #283142;
 $bg-dark-sider: #283142;
 
@@ -32,7 +39,7 @@ $color-table-row-error: #ffcbcb;
 $table-table-row-disabled: rgba(198, 198, 198, 0.13);
 
 $bg-layout: #f6f6fa;
-$bg-layout-dark: #1B2531;
+$bg-layout-dark: $bg-dark-main;
 $bg-sider-layout: #283142;
 $bg-primary-light: #20232a;
 $text-primary-light: #92a2f1;

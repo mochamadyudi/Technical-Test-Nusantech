@@ -14,6 +14,13 @@
 
 .app{
   @apply min-h-screen #{!important};
+  &-content-full {
+    &-fix{
+      height: calc(100vh - $height-header);
+    }
+    min-height: 100vb;
+    //min-height: calc(100vh - $height-header);
+  }
 
   @include themify($themes){
     background: themed('bg-layout') !important;
@@ -22,13 +29,13 @@
   .ant{
     &-layout{
       @include themify($themes){
-        background: themed('bg-layout');
+        background: themed('bg-layout') !important;
       }
     }
   }
   &-main{
     @apply relative z-0 min-h-screen #{!important};
-    padding-top: $height-header;
+    //padding-top: $height-header;
     @include themify($themes){
       background: themed('bg-layout') !important;
     }
@@ -43,6 +50,23 @@
     @apply p-0 #{!important};
     z-index: $zIndexHeader;
     height: $height-header !important;
+    @include themify($themes){
+      background: themed('bg-header');
+    }
+
+    &.app{
+      &-header{
+        &-transparent{
+          @apply bg-transparent #{!important};
+          transition: .2s ease-in-out;
+          &--inactive{
+            @apply bg-black bg-opacity-50 backdrop-blur #{!important};
+          }
+        }
+      }
+    }
+
+
   }
 
   .ant{

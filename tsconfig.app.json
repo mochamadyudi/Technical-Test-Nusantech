@@ -22,10 +22,18 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@components/*": ["@core/*"],
-      "@assets/*": ["assets/*"]
+      "@components/*": ["src/components/*"],
+      "@partials/*": ["src/components/partials/*"],
+      "@state/*": ["src/redux/*"],
+      "@utils/*": ["src/utils/*"],
+      "@screens/*": ["src/views/screens/*"],
+      "@middleware": ["src/middleware/index"],
+      "@middleware/*": ["src/middleware/*"],
+      "@/assets/*": ["src/assets/*"],
+      "@/types/*": ["src/types/*"],
+      "@/config/*": ["src/configs/*"],
     }
   },
   "include": [

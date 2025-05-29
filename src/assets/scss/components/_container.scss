@@ -1,5 +1,6 @@
 .yid {
   &-container {
-    @apply w-full max-w-5xl mx-auto px-4 #{!important};
+    @apply w-full mx-auto px-4 #{!important};
+    max-width: $breakpoints-xl !important;
   }
 }

@@ -4,12 +4,18 @@ export const APP_CONFIG: importMetaEnv = {
   VITE_API_VERSION: import.meta.env.VITE_API_VERSION,
   VITE_API_URL: import.meta.env.VITE_API_URL,
   VITE_APP_NAME: import.meta.env.VITE_APP_NAME,
+  VITE_APP_WATERMARK: import.meta.env.VITE_APP_WATERMARK,
+  VITE_API_STATE: import.meta.env.VITE_API_STATE,
+  VITE_TMDB_ACCESS_TOKEN: import.meta.env.VITE_TMDB_ACCESS_TOKEN,
+  VITE_TMDB_API_KEY: import.meta.env.VITE_TMDB_API_KEY,
+  VITE_APP_URL: import.meta.env.VITE_APP_URL,
+  VITE_APP_TMDB_URI_ASSET: import.meta.env.VITE_APP_TMDB_URI_ASSET,
   version: import.meta.env.VITE_API_VERSION,
   apiUrl: import.meta.env.VITE_API_URL,
 }
 
 export const THEME_CONFIG: ThemeConfig & {[k:string]: any} = {
-  'currentTheme': 'light',
+  'currentTheme': 'dark',
   'sider': {
     'collapsed': false,
   },
@@ -17,7 +23,7 @@ export const THEME_CONFIG: ThemeConfig & {[k:string]: any} = {
   //default antd theme
   "cssVar": true,
   "token": {
-    "colorPrimary": "#ffab02",
+    "colorPrimary": "#a81cc3",
     "colorInfo": "#5398f7",
     "colorSuccess": "#4eb71a",
     "colorWarning": "#eca619",

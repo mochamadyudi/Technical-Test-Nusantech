@@ -34,12 +34,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ form, formOptions, children }) =>
         form={form}
       >
         <Form.Item name="email" label="Email" rules={rules.email}>
-          <Input prefix={<MailOutlined/>} />
+          <Input prefix={<MailOutlined/>} autoComplete="email" />
         </Form.Item>
         <Form.Item
           name="password" label="Password" rules={[{ required: true }]}
         >
-          <Input.Password size="large" placeholder="Input your password"/>
+          <Input.Password autoComplete="current-password" size="large" placeholder="Input your password"/>
         </Form.Item>
         {children}
       </Form>

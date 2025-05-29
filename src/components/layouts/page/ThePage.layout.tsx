@@ -1,19 +1,28 @@
+import { Layout } from 'antd'
 import React from 'react';
-import type { ReactNode } from 'react';
+import { Outlet } from 'react-router-dom'
+import TheAppLayout from '../app/TheApp.layout.tsx'
+import WrapperLayout from '../wrapper.layout.tsx'
 
 interface ThePageProps {
-  children: ReactNode;
   [k:string]: any;
 }
 
-class ThePage extends React.Component<ThePageProps> {
+class ThePageLayout extends React.Component<ThePageProps> {
   render(){
     return (
-      <div className="">
-        {this.props.children}
-      </div>
+      <WrapperLayout>
+        <Layout className="app-page">
+          <TheAppLayout.Header/>
+          <Layout className="app-page-main">
+            <Layout.Content className="app-page-content">
+              <Outlet />
+            </Layout.Content>
+          </Layout>
+        </Layout>
+      </WrapperLayout>
     )
   }
 };
 
-export default ThePage;
+export default ThePageLayout;

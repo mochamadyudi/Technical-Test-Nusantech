@@ -17,11 +17,9 @@
       &-label {
         label {
           font-family: sf-pro-medium, sans-serif;
-          font-size: $font-size-base !important;
           @include themify($themes) {
             color: themed('text');
           }
-          font-weight: 600;
         }
       }
     }

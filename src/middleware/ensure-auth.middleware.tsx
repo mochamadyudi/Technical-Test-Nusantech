@@ -21,7 +21,7 @@ const Middleware: React.FC<EnsureAuthMiddlewareProps> = ({
     return <PageLoading />;
   }
   if(auth.isAuth){
-    return <Navigate to={search.get("redirect") ?? `/dashboard`}/>;
+    return <Navigate to={search.get("redirect") ?? `/`}/>;
   }
   return children;
 }

@@ -8,45 +8,31 @@
 
 .dark{
   .slick{
-    &-list{
-      &:before{
-        @include slick-shadow-wrapper('left'){
-          @apply left-0;
-          background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(0,212,255,0) 100%);
-        }
-      }
-      &:after{
-        @include slick-shadow-wrapper('right'){
-          @apply right-0;
-          background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(0, 0, 0) 100%);
-        }
-      }
-    }
+    //&-list{
+    //  &:before{
+    //    @include slick-shadow-wrapper('left'){
+    //      @apply left-0;
+    //      background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(0,212,255,0) 100%);
+    //    }
+    //  }
+    //  &:after{
+    //    @include slick-shadow-wrapper('right'){
+    //      @apply right-0;
+    //      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(0, 0, 0) 100%);
+    //    }
+    //  }
+    //}
   }
 }
 
 .slick{
   &-list{
-    @apply  w-full relative;
-    &:before{
-      @include slick-shadow-wrapper('left'){
-        @apply left-0;
-        background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgba(0,212,255,0) 100%);
-      }
-
-    }
-    &:after{
-      @include slick-shadow-wrapper('right'){
-        @apply right-0;
-        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 1) 100%);
-      }
-
-    }
+    @apply  w-full relative space-x-4;
   }
   &-slide{
-    @apply flex items-center justify-center relative;
+    @apply flex items-center justify-start relative space-x-2;
     > div {
-      @apply flex items-center justify-center;
+      @apply flex items-center space-x-2;
     }
     img{
       transition:.2s;
@@ -56,12 +42,19 @@
       &-current{
         img{
           transition: .2s;
-          filter: grayscale(2) !important;
+          filter: grayscale(0) !important;
         }
       }
     }
   }
+  &-track{
+    @apply flex;
+    > div {
+      @apply px-2;
+    }
+  }
   &-list{
+    @apply flex flex-col;
     @apply w-full;
   }
 }

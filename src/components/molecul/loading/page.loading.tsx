@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LottiesMolecul from '../lotties.molecul.tsx'
-
+import Animation from '../../../assets/lotties/loading-spinner-dots.json';
 const PageLoading: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <React.Fragment>
@@ -9,7 +9,7 @@ const PageLoading: React.FC<{ children?: React.ReactNode }> = ({ children }) => 
         <LottiesMolecul
           // width={350}
           height={220}
-          animation={null} />
+          animation={Animation} />
         {children}
       </div>
     </React.Fragment>

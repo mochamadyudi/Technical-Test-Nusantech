@@ -1,6 +1,10 @@
 export const ACT_EVENT = (type: string): string => {
   return `EVT/${type}`;
 };
+export const ACT_LISTEN = (type: string): string => {
+  return `LISTEN/${type}`;
+};
+
 export const ACT_REQUEST = (type: string): string => {
   return `REQ/${type}`;
 };

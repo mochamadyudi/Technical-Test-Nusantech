@@ -1,0 +1,24 @@
+$quil-border-color: #dfdfdf;
+$quil-border-size: 0.9px;
+.quill {
+  @apply rounded-lg #{!important};
+  border: $quil-border-size solid $quil-border-color;
+  .ql{
+    &-toolbar{
+      @apply rounded-t-lg #{!important};
+      border-bottom: $quil-border-size solid $quil-border-color !important;
+    }
+
+    &-toolbar, &-container{
+      border-top: 0 !important;
+      border-left: 0 !important;
+      border-right: 0 !important;
+      background: white;
+    }
+
+    &-container{
+      @apply rounded-b-lg h-60 #{!important};
+      border-bottom: 0 !important;
+    }
+  }
+}
