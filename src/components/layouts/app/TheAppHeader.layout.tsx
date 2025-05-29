@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Dropdown, Flex, Layout, Menu, Tooltip} from 'antd'
+import {Button, Dropdown, Flex, Layout, Menu} from 'antd'
 import TheContainer from '../TheContainer.tsx'
 import Logo from '@components/atoms/logo.tsx'
 import {useDispatch, useSelector} from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Icons } from '@components/atoms/Icons.tsx'
 import { useLocation } from 'react-router'
 import {ITmdbState} from "@state/reducers/tmdb.ts";
@@ -70,11 +70,6 @@ function RightSection() {
   return (
     <React.Fragment>
       <Flex align="center" gap={20}>
-        <Tooltip title={'Create Article'}>
-          <Link to={'/app/article/create'}>
-            <Button type="primary" shape={'circle'} icon={<Icons type={'EditOutlined'}/> }/>
-          </Link>
-        </Tooltip>
         <Dropdown
           trigger={['click']}
           menu={{
