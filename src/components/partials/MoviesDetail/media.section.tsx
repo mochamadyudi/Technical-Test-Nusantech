@@ -1,5 +1,5 @@
 import React from 'react';
-import {Empty, Image, Spin, Tabs, Typography} from "antd";
+import { Col, Empty, Image, Row, Spin, Tabs, Typography } from 'antd'
 import TheContainer from "@components/layouts/TheContainer.tsx";
 import {useSelector} from "react-redux";
 import {ITmdbState} from "@state/reducers/tmdb.ts";
@@ -15,20 +15,20 @@ const MediaItem: React.FC<MediaItemProps> = ({ stateKey }) => {
   return (
     <div className="w-full ">
       {
-        state.images.loading ? (
+        state.images?.loading ? (
             <div className="w-full flex items-center justify-center">
               <Spin/>
             </div>
           ) :
-          <div className="grid grid-cols-5 justify-center gap-5">
+          <Row gutter={[24, 24]}>
             {
-              typeof(state.images.data[stateKey]) !== 'undefined' &&
-              Array.isArray(state.images.data[stateKey]) &&
-              state.images.data[stateKey].length > 0 ?
-                state.images.data[stateKey].slice(0, 5)
+              typeof(state.images?.data[stateKey]) !== 'undefined' &&
+              Array.isArray(state.images?.data[stateKey]) &&
+              state.images?.data[stateKey].length > 0 ?
+                state.images?.data[stateKey].slice(0, 6)
                   .map((item: MovieImageBackdropOrLogo) => {
                     return (
-                      <div className="col-span-1">
+                      <Col xs={12} sm={12} md={8} lg={6} xl={4}>
                         <Image.PreviewGroup
                           items={[
                             HttpUtil.getAssetTmdb(item?.file_path, 'original') ?? '',
@@ -50,13 +50,13 @@ const MediaItem: React.FC<MediaItemProps> = ({ stateKey }) => {
                             loading="lazy"
                           />
                         </Image.PreviewGroup>
-                      </div>
+                      </Col>
                     )
                   })
                 :
                 <Empty/>
             }
-          </div>
+          </Row>
       }
     </div>
   )
@@ -74,17 +74,17 @@ const MediaSection: React.FC = () => {
           items={[
             {
               key: "poster",
-              label: `Posters ${Array.isArray(state.images.data?.posters) ? `(${state.images.data?.posters.length})` : ''}`,
+              label: `Posters ${Array.isArray(state.images?.data?.posters) ? `(${state.images?.data?.posters.length})` : ''}`,
               children: <MediaItem stateKey={'posters'}/>
             },
             {
               key: "backdrop",
-              label: `Backdrops ${Array.isArray(state.images.data?.backdrops) ? `(${state.images.data?.backdrops.length})` : ''}`,
+              label: `Backdrops ${Array.isArray(state.images?.data?.backdrops) ? `(${state.images?.data?.backdrops.length})` : ''}`,
               children: <MediaItem stateKey={'backdrops'}/>
             },
             {
               key: "logos",
-              label: `Logo ${Array.isArray(state.images.data?.logos) ? `(${state.images.data?.logos.length})` : ''}`,
+              label: `Logo ${Array.isArray(state.images?.data?.logos) ? `(${state.images?.data?.logos.length})` : ''}`,
               children: <MediaItem stateKey={'logos'}/>
             },
           ]}

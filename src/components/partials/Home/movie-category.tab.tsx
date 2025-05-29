@@ -3,12 +3,12 @@ import TheContainer from "@components/layouts/TheContainer.tsx";
 import {Button} from "antd";
 import MovieByCategory, {IMovieByCategoryProps} from "@partials/Home/movie-category.section.tsx";
 import {
-  GetMovieNowPlaying,
-  GetMoviePopular,
-  GetMovieTopRated,
+  GetMovieNowPlaying, GetMovieNowPlayingScroll,
+  GetMoviePopular, GetMoviePopularScroll,
+  GetMovieTopRated, GetMovieTopRatedScroll,
   GetMovieTrend,
-  GetMovieUpComing
-} from "@state/actions/tmdb.ts";
+  GetMovieUpComing, GetMovieUpComingScroll,
+} from '@state/actions/tmdb.ts'
 import {Icons} from "@components/atoms/Icons.tsx";
 
 type ItemMenuAttribute = {
@@ -36,6 +36,7 @@ const MovieCategoryTab: React.FC = () => {
         stateKey: "popular",
         page: 2,
         actions: GetMoviePopular,
+        loadMore: GetMoviePopularScroll,
       }
     },
     {
@@ -45,6 +46,7 @@ const MovieCategoryTab: React.FC = () => {
       options: {
         stateKey: "now_playing",
         actions: GetMovieNowPlaying,
+        loadMore: GetMovieNowPlayingScroll,
       }
     },
     {
@@ -54,6 +56,7 @@ const MovieCategoryTab: React.FC = () => {
       options: {
         stateKey: "top_rated",
         actions: GetMovieTopRated,
+        loadMore: GetMovieTopRatedScroll,
       }
     },
     {
@@ -63,6 +66,7 @@ const MovieCategoryTab: React.FC = () => {
       options: {
         stateKey: "up_coming",
         actions: GetMovieUpComing,
+        loadMore: GetMovieUpComingScroll,
       }
     },
   ]
@@ -99,6 +103,7 @@ const MovieCategoryTab: React.FC = () => {
                   stateKey={item.options.stateKey}
                   page={item.options?.page ?? 1}
                   actions={item.options.actions}
+                  loadMore={item.options.loadMore}
                 />
               )
             })
