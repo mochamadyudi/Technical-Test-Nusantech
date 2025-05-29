@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 import { useLocation } from 'react-router'
 import PageLoading from '../components/molecul/loading/page.loading.tsx'
-import type { AuthDefaultState } from 'redux/reducers/auth.ts'
+import type { AuthDefaultState } from '@state/reducers/auth.ts'
 
 interface EnsureAuthMiddlewareProps {
   children: React.ReactNode;
