@@ -1,6 +1,5 @@
 import React from 'react';
 import { Flex, Typography, Image } from 'antd'
-import Dashboard from '../../layouts/dashboard'
 
 type PageHeaderOptions = {
   addonAfter?: React.ReactNode;
@@ -42,11 +41,6 @@ const PageHeader: React.FC<PageHeaderProps> = ({container = false, ...props}) =>
                   <div className="flex-1">
                     {props?.options?.addonBefore}
                     <Typography.Title level={1} className="!m-0 !text-2xl">{props?.title}</Typography.Title>
-                    {
-                      props?.options?.breadcrumbs && (
-                        <Dashboard.Breadcrumbs/>
-                      )
-                    }
                     {props?.options?.addonAfter}
                   </div>
                 </Flex>

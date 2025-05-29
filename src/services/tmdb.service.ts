@@ -4,78 +4,133 @@ import {AxiosResponse} from "axios";
 
 export class Service implements ITMDBServiceInterface {
   getConfigLanguages(): Promise<any[]> {
-    return Interceptors.get('/configuration/languages');
+    return Interceptors.get('/configuration/languages')
   }
-  getGenreMovie(lang?: "en" | string): Promise<AxiosResponse<any>> {
-    return Interceptors.get('/genre/movie/list', {params: {language: lang ?? 'en'}})
-  }
-
-  getGenreTVList(lang?: "en" | string): Promise<AxiosResponse<any>> {
-    return Interceptors.get('/genre/tv/list', {params: {language: lang ?? 'en'}})
+  getGenreMovie(lang?: 'en' | string): Promise<AxiosResponse<any>> {
+    return Interceptors.get('/genre/movie/list', {
+      params: { language: lang ?? 'en' },
+    })
   }
 
-  getMoviesNowPlaying<T = any>(params?: Pick<TMDBParams, "region" | "language">): Promise<AxiosResponse<T>> {
-    return Interceptors.get('/movie/now_playing', {params: params})
+  getGenreTVList(lang?: 'en' | string): Promise<AxiosResponse<any>> {
+    return Interceptors.get('/genre/tv/list', {
+      params: { language: lang ?? 'en' },
+    })
   }
 
-  getMoviesPopular<T = any>(params?: Pick<TMDBParams, "region" | "language" | "page">): Promise<AxiosResponse<T>> {
-    return Interceptors.get('/movie/popular', {params: params})
+  getMoviesNowPlaying<T = any>(
+    params?: Pick<TMDBParams, 'region' | 'language'>
+  ): Promise<AxiosResponse<T>> {
+    return Interceptors.get('/movie/now_playing', { params: params })
   }
 
-  getMoviesTopRated<T = any>(params?: Pick<TMDBParams, "region" | "language" | "page">): Promise<AxiosResponse<T>> {
-    return Interceptors.get('/movie/top_rated', {params: params})
+  getMoviesPopular<T = any>(
+    params?: Pick<TMDBParams, 'region' | 'language' | 'page'>
+  ): Promise<AxiosResponse<T>> {
+    return Interceptors.get('/movie/popular', { params: params })
   }
 
-  getMoviesUpComing<T = any>(params?: Pick<TMDBParams, "region" | "language" | "page">): Promise<AxiosResponse<T>> {
-    return Interceptors.get('/movie/upcoming', {params: params})
+  getMoviesTopRated<T = any>(
+    params?: Pick<TMDBParams, 'region' | 'language' | 'page'>
+  ): Promise<AxiosResponse<T>> {
+    return Interceptors.get('/movie/top_rated', { params: params })
   }
 
-  showMovieDetail(movieId: number, params?: Pick<TMDBParams, "append_to_response" | "language">): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/movie/${movieId}`, {params: params})
+  getMoviesUpComing<T = any>(
+    params?: Pick<TMDBParams, 'region' | 'language' | 'page'>
+  ): Promise<AxiosResponse<T>> {
+    return Interceptors.get('/movie/upcoming', { params: params })
   }
 
-  showMovieImages(movieId: number, params?: Pick<TMDBParams, "include_image_language" | "language">): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/movie/${movieId}/images`, {params: params})
+  showMovieDetail(
+    movieId: number,
+    params?: Pick<TMDBParams, 'append_to_response' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/movie/${movieId}`, { params: params })
   }
 
-  showMovieList(movieId: number, params?: Pick<TMDBParams, "append_to_response" | "language">): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/movie/${movieId}/lists`, {params: params})
+  showMovieImages(
+    movieId: number,
+    params?: Pick<TMDBParams, 'include_image_language' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/movie/${movieId}/images`, { params: params })
+  }
+
+  showMovieList(
+    movieId: number,
+    params?: Pick<TMDBParams, 'append_to_response' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/movie/${movieId}/lists`, { params: params })
   }
 
   showMovieKeywords(movieId: number): Promise<AxiosResponse<any>> {
     return Interceptors.get(`/movie/${movieId}/keywords`)
   }
 
-  showMovieRecommendation(movieId: number, params?: Pick<TMDBParams, 'page' | 'language'>): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/movie/${movieId}/recommendations`, {params: params})
+  showMovieRecommendation(
+    movieId: number,
+    params?: Pick<TMDBParams, 'page' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/movie/${movieId}/recommendations`, {
+      params: params,
+    })
   }
 
-  showMovieReviews(movieId: number, params?: Pick<TMDBParams, 'page' | 'language'>): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/movie/${movieId}/reviews`, {params: params})
+  showMovieReviews(
+    movieId: number,
+    params?: Pick<TMDBParams, 'page' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/movie/${movieId}/reviews`, { params: params })
   }
 
-  showMovieSimilar(movieId: number, params?: Pick<TMDBParams, 'page' | 'language'>): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/movie/${movieId}/reviews`, {params: params})
+  showMovieSimilar(
+    movieId: number,
+    params?: Pick<TMDBParams, 'page' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/movie/${movieId}/reviews`, { params: params })
   }
 
-  getTrendAll(timeWindow: "day" | "week", language: string): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/trending/all/${timeWindow}`, {params: {language: language ?? 'en-US'}})
+  getTrendAll(
+    timeWindow: 'day' | 'week',
+    language: string
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/trending/all/${timeWindow}`, {
+      params: { language: language ?? 'en-US' },
+    })
   }
 
-  getTrendMovie(timeWindow: "day" | "week", language: string): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/trending/movie/${timeWindow}`, {params: {language: language ?? 'en-US'}})
+  getTrendMovie(
+    timeWindow: 'day' | 'week',
+    language: string
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/trending/movie/${timeWindow}`, {
+      params: { language: language ?? 'en-US' },
+    })
   }
 
-  getTrendPeople(timeWindow: "day" | "week", language: string): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/trending/person/${timeWindow}`, {params: {language: language ?? 'en-US'}})
+  getTrendPeople(
+    timeWindow: 'day' | 'week',
+    language: string
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/trending/person/${timeWindow}`, {
+      params: { language: language ?? 'en-US' },
+    })
   }
 
-  getTrendTV(timeWindow: "day" | "week", language: string): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/trending/tv/${timeWindow}`, {params: {language: language ?? 'en-US'}})
+  getTrendTV(
+    timeWindow: 'day' | 'week',
+    language: string
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/trending/tv/${timeWindow}`, {
+      params: { language: language ?? 'en-US' },
+    })
   }
 
-  getTvSeriesDetail(series_id: number, params?: Pick<TMDBParams, "append_to_response" | "language">): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/tv/${series_id}`, {params: params})
+  getTvSeriesDetail(
+    series_id: number,
+    params?: Pick<TMDBParams, 'append_to_response' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/tv/${series_id}`, { params: params })
   }
 
   getTvSeriesEpisodeGroup(series_id: number): Promise<AxiosResponse<any>> {
@@ -102,7 +157,10 @@ export class Service implements ITMDBServiceInterface {
     return Interceptors.get(`/tv/${series_id}/reviews`)
   }
 
-  getTvSeriesSimilar(series_id: number, params?: Pick<TMDBParams, "page" | "language">): Promise<AxiosResponse<any>> {
+  getTvSeriesSimilar(
+    series_id: number,
+    params?: Pick<TMDBParams, 'page' | 'language'>
+  ): Promise<AxiosResponse<any>> {
     return Interceptors.get(`/tv/${series_id}/similar`, { params })
   }
 
@@ -110,12 +168,24 @@ export class Service implements ITMDBServiceInterface {
     return Interceptors.get(`/tv/${series_id}/videos`)
   }
 
-  getTVSeasonsDetail(series_id: number, season_number: number, params?: Pick<TMDBParams, "append_to_response" | "language">): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/tv/${series_id}/season/${season_number}`, { params })
+  getTVSeasonsDetail(
+    series_id: number,
+    season_number: number,
+    params?: Pick<TMDBParams, 'append_to_response' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/tv/${series_id}/season/${season_number}`, {
+      params,
+    })
   }
 
-  getTVSeasonsVideos(series_id: number, season_number: number, params?: Pick<TMDBParams, "include_video_language" | "language">): Promise<AxiosResponse<any>> {
-    return Interceptors.get(`/tv/${series_id}/season/${season_number}`, { params })
+  getTVSeasonsVideos(
+    series_id: number,
+    season_number: number,
+    params?: Pick<TMDBParams, 'include_video_language' | 'language'>
+  ): Promise<AxiosResponse<any>> {
+    return Interceptors.get(`/tv/${series_id}/season/${season_number}`, {
+      params,
+    })
   }
 }
 

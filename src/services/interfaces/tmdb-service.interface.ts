@@ -24,7 +24,6 @@ export interface ITMDBServiceInterface {
   showMovieRecommendation(movieId: number, params?: Pick<TMDBParams, 'page' | 'language'>): Promise<any>;
   showMovieReviews(movieId: number, params?: Pick<TMDBParams, 'page' | 'language'>): Promise<any>;
   showMovieSimilar(movieId: number, params?: Pick<TMDBParams, 'page' | 'language'>): Promise<any>;
-  showMovieCasting(movieId: number, params?: Pick<TMDBParams, 'page' | 'language'>): Promise<any>;
 
   getTrendAll(timeWindow: 'day' | 'week', language?: TMDBParams['language'] ): Promise<any>;
   getTrendMovie(timeWindow: 'day' | 'week', language: TMDBParams['language']): Promise<any>;
