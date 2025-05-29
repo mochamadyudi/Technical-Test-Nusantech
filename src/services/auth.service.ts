@@ -1,4 +1,4 @@
-import {IAuthSignInDto, IAuthSignUpDto} from 'redux/actions';
+import {IAuthSignInDto, IAuthSignUpDto} from '@state/actions';
 import {IAuthService} from './interfaces'
 import Interceptors from '../configs/interceptors.ts'
 import HttpUtil from '../utils/http.util.ts'
