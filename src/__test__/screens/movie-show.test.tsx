@@ -74,7 +74,29 @@ describe('Movie Show Page', () => {
   });
 
   it('[hero-section]: should display correct rating based on vote_average', () => {
+    const vote = 7.6
+    const store = mockStore({
+      tmdb: {
+        languages: { current: { iso_639_1: 'en-US' } },
+        movies: {
+          show: {
+            loading: false,
+            data: {
+              title: 'Test Movie',
+              vote_average: vote,
+              popularity: 5000,
+              backdrop_path: null,
+              status: 'Released',
+              release_date: '2020-01-01',
+            },
+          },
+        },
+      },
+    })
 
+    const { container } = renderWithStore(store)
+    const stars = container.querySelectorAll('.ant-rate-star-full, .ant-rate-star-half')
+    expect(stars.length).toBeGreaterThan(0);
   })
 
   it('[hero-section]: Should render backdrop image with correct URL', () => {
