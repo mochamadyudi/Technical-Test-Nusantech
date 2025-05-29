@@ -9,6 +9,16 @@ export const ACT_REQUEST = (type: string): string => {
   return `REQ/${type}`;
 };
 
+export const ACT_REQUEST_SCROLL = (type: string): string => {
+  return `REQ/${type}/SCROLL`;
+};
+export const ACT_SUCCESS_SCROLL = (type: string): string => {
+  return `REQ/${type}/SUCCESS/SCROLL`;
+};
+export const ACT_FAILURE_SCROLL = (type: string): string => {
+  return `REQ/${type}/SUCCESS/SCROLL`;
+};
+
 export const ACT_SUCCESS = (type: string): string => {
   return `REQ/${type}/SUCCESS`;
 };

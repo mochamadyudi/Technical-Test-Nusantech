@@ -1,7 +1,14 @@
 import { REHYDRATE } from 'redux-persist';
 import type {ActionRedux} from "@/types/global";
 import {MovieAttribute, MovieImageBackdropOrLogo} from "@/types/tmdb";
-import {ACT_EVENT, ACT_FAILURE, ACT_REQUEST, ACT_SUCCESS} from "../constants/action.ts";
+import {
+  ACT_EVENT,
+  ACT_FAILURE, ACT_FAILURE_SCROLL,
+  ACT_REQUEST,
+  ACT_REQUEST_SCROLL,
+  ACT_SUCCESS,
+  ACT_SUCCESS_SCROLL,
+} from '../constants/action.ts'
 import {
   TMDB_CHANGE_LANGUAGE,
   TMDB_CONFIG_LANGUAGES, TMDB_GET_DETAIL_MOVIE, TMDB_GET_MOVIE_IMAGES, TMDB_GET_MOVIE_KEYWORDS, TMDB_GET_MOVIE_LISTS,
@@ -19,14 +26,14 @@ export type TmdbMovieItem = MovieAttribute;
 export interface ITmdbStateAttr<T = any> {
   loading: boolean;
   data: T | T[] | TmdbMovieItem | any;
-
+  loadingMore: boolean;
   [key: string]: any;
 }
 
 export type ITmdbDefaultStateKey<T = any> = {
-  page?: number;
-  total_pages?: number;
-  total_results?: number;
+  page: number;
+  total_pages: number;
+  total_results: number;
 } & ITmdbStateAttr<T>;
 
 export type TmdbLanguage = {
@@ -35,6 +42,12 @@ export type TmdbLanguage = {
   name: string | null;
 }
 
+export type ImageState = ITmdbDefaultStateKey<{
+  id?: number;
+  logos?: MovieImageBackdropOrLogo[];
+  backdrops?: MovieImageBackdropOrLogo[];
+  posters?: MovieImageBackdropOrLogo[];
+}>
 export interface ITmdbState {
   rehydrate: boolean;
   languages: {
@@ -44,14 +57,10 @@ export interface ITmdbState {
   },
   movies: {
     show: ITmdbStateAttr<TmdbMovieItem> & {
-      images: ITmdbDefaultStateKey<{
-        id?: number;
-        logos?: MovieImageBackdropOrLogo[];
-        backdrops?: MovieImageBackdropOrLogo[];
-        posters?: MovieImageBackdropOrLogo[];
-      }>,
+      images: Omit<ImageState, 'page' | 'total_pages' | 'total_results'>,
       lists: ITmdbDefaultStateKey<TmdbMovieItem>,
       recommendations: ITmdbDefaultStateKey<TmdbMovieItem>,
+      casting: ITmdbDefaultStateKey<TmdbMovieItem>,
     }
     trends: ITmdbDefaultStateKey<TmdbMovieItem>;
     now_playing: ITmdbDefaultStateKey<TmdbMovieItem>;
@@ -71,27 +80,41 @@ const initialState: ITmdbState = {
   movies: {
     show: {
       loading: true,
+      loadingMore: false,
       data: {},
       images: {
         loading: false,
+        loadingMore: false,
         data: {},
       },
       lists: {
         loading: false,
+        loadingMore: false,
         total_pages: 0,
         total_results: 0,
         page: 1,
         data: []
       },
       recommendations: {
+        loadingMore: false,
         loading: false,
         total_pages: 0,
         total_results: 0,
         page: 1,
         data: []
       },
+      casting: {
+        loadingMore: false,
+        loading: false,
+        total_pages: 0,
+        total_results: 0,
+        page: 1,
+        data: []
+      },
+
     },
     trends: {
+      loadingMore: false,
       loading: false,
       total_pages: 0,
       total_results: 0,
@@ -99,6 +122,7 @@ const initialState: ITmdbState = {
       data: []
     },
     now_playing: {
+      loadingMore: false,
       loading: false,
       total_pages: 0,
       total_results: 0,
@@ -106,6 +130,7 @@ const initialState: ITmdbState = {
       data: []
     },
     popular: {
+      loadingMore: false,
       loading: false,
       total_pages: 0,
       total_results: 0,
@@ -113,6 +138,7 @@ const initialState: ITmdbState = {
       data: []
     },
     top_rated: {
+      loadingMore: false,
       loading: false,
       total_pages: 0,
       total_results: 0,
@@ -120,6 +146,7 @@ const initialState: ITmdbState = {
       data: []
     },
     up_coming: {
+      loadingMore: false,
       loading: false,
       total_pages: 0,
       total_results: 0,
@@ -128,6 +155,7 @@ const initialState: ITmdbState = {
     }
   }
 }
+
 export default function (state: ITmdbState = initialState, action: ActionRedux<any>) {
   switch (action.type) {
     case REHYDRATE:
@@ -512,6 +540,173 @@ export default function (state: ITmdbState = initialState, action: ActionRedux<a
           }
         }
       }
+
+
+    case ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_POPULARS):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          popular: {
+            ...state.movies.popular,
+            loadingMore: true,
+          }
+        }
+      }
+    case ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_POPULARS):
+      if(typeof(action?.payload?.results) !== 'undefined'){
+        state.movies.popular.data = [...state.movies.popular.data, ...action?.payload?.results];
+      }
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          popular: {
+            ...state.movies.popular,
+            loadingMore: false,
+            data: state.movies.popular.data ?? [],
+            total_results: action?.payload?.total_results ?? state.movies.popular.total_results,
+            total_pages: action?.payload?.total_pages ?? state.movies.popular.total_pages,
+            page: action?.payload?.page ?? state.movies.popular.page,
+          }
+        }
+      }
+    case ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_POPULARS):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          popular: {
+            ...state.movies.popular,
+            loadingMore: false,
+          }
+        }
+      }
+
+    case ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_UPCOMING):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          up_coming: {
+            ...state.movies.up_coming,
+            loadingMore: true,
+          }
+        }
+      }
+    case ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_UPCOMING):
+      if(typeof(action?.payload?.results) !== 'undefined'){
+        state.movies.up_coming.data = [...state.movies.up_coming.data, ...action?.payload?.results];
+      }
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          up_coming: {
+            ...state.movies.up_coming,
+            loadingMore: false,
+            data: state.movies.up_coming.data ?? [],
+            total_results: action?.payload?.total_results ?? state.movies.up_coming.total_results,
+            total_pages: action?.payload?.total_pages ?? state.movies.up_coming.total_pages,
+            page: action?.payload?.page ?? state.movies.up_coming.page,
+          }
+        }
+      }
+    case ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_UPCOMING):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          up_coming: {
+            ...state.movies.up_coming,
+            loadingMore: false,
+          }
+        }
+      }
+
+    case ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_TOP_RATED):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          top_rated: {
+            ...state.movies.top_rated,
+            loadingMore: true,
+          }
+        }
+      }
+    case ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_TOP_RATED):
+      if(typeof(action?.payload?.results) !== 'undefined'){
+        state.movies.top_rated.data = [...state.movies.top_rated.data, ...action?.payload?.results];
+      }
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          top_rated: {
+            ...state.movies.top_rated,
+            loadingMore: false,
+            data: state.movies.top_rated.data ?? [],
+            total_results: action?.payload?.total_results ?? state.movies.top_rated.total_results,
+            total_pages: action?.payload?.total_pages ?? state.movies.top_rated.total_pages,
+            page: action?.payload?.page ?? state.movies.top_rated.page,
+          }
+        }
+      }
+    case ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_TOP_RATED):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          top_rated: {
+            ...state.movies.top_rated,
+            loadingMore: false,
+          }
+        }
+      }
+
+    case ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_NOW_PLAYING):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          now_playing: {
+            ...state.movies.now_playing,
+            loadingMore: true,
+          }
+        }
+      }
+    case ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_NOW_PLAYING):
+      if(typeof(action?.payload?.results) !== 'undefined'){
+        state.movies.now_playing.data = [...state.movies.now_playing.data, ...action?.payload?.results];
+      }
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          now_playing: {
+            ...state.movies.now_playing,
+            loadingMore: false,
+            data: state.movies.now_playing.data ?? [],
+            total_results: action?.payload?.total_results ?? state.movies.now_playing.total_results,
+            total_pages: action?.payload?.total_pages ?? state.movies.now_playing.total_pages,
+            page: action?.payload?.page ?? state.movies.now_playing.page,
+          }
+        }
+      }
+    case ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_NOW_PLAYING):
+      return {
+        ...state,
+        movies: {
+          ...state.movies,
+          now_playing: {
+            ...state.movies.now_playing,
+            loadingMore: false,
+          }
+        }
+      }
+
+
     default:
       return state;
   }

@@ -1,5 +1,12 @@
 import {takeEvery, put, all, fork, call} from 'redux-saga/effects';
-import {ACT_FAILURE, ACT_REQUEST, ACT_SUCCESS} from "../constants/action.ts";
+import {
+  ACT_FAILURE,
+  ACT_FAILURE_SCROLL,
+  ACT_REQUEST,
+  ACT_REQUEST_SCROLL,
+  ACT_SUCCESS,
+  ACT_SUCCESS_SCROLL,
+} from '../constants/action.ts'
 import {
   TMDB_CONFIG_LANGUAGES, TMDB_GET_ALL_MOVIES, TMDB_GET_DETAIL_MOVIE, TMDB_GET_MOVIE_IMAGES, TMDB_GET_MOVIE_NOW_PLAYING,
   TMDB_GET_MOVIE_POPULARS, TMDB_GET_MOVIE_RECOMMENDATIONS,
@@ -211,6 +218,158 @@ export function* getMovieTrends() {
   })
 }
 
+export function* getMoviePopularScroll() {
+  yield takeEvery<ActionRedux<Pick<TMDBParams, 'region' | 'language' | 'page'>>>
+  (ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_POPULARS), function* (action) {
+    try {
+      //@ts-ignore
+      const response = yield call(() => Promise.resolve(TmdbService.getMoviesPopular(action.payload)));
+
+      if (response?.status === 200) {
+        yield all([
+          put({
+            type: ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_POPULARS),
+            payload: {
+              ...response?.data,
+            }
+          })
+        ])
+      } else {
+        yield put({
+          type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_POPULARS),
+          payload: [],
+        })
+      }
+    } catch (err) {
+      yield put({
+        type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_POPULARS),
+        payload: [],
+      })
+    }
+  })
+}
+export function* getMovieUpcomingScroll() {
+  yield takeEvery<ActionRedux<Pick<TMDBParams, 'region' | 'language' | 'page'>>>
+  (ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_UPCOMING), function* (action) {
+    try {
+      //@ts-ignore
+      const response = yield call(() => Promise.resolve(TmdbService.getMoviesUpComing(action.payload)));
+
+      if (response?.status === 200) {
+        yield all([
+          put({
+            type: ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_UPCOMING),
+            payload: {
+              ...response?.data,
+            }
+          })
+        ])
+      } else {
+        yield put({
+          type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_UPCOMING),
+          payload: [],
+        })
+      }
+    } catch (err) {
+      yield put({
+        type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_UPCOMING),
+        payload: [],
+      })
+    }
+  })
+}
+export function* getMovieTopRatedScroll() {
+  yield takeEvery<ActionRedux<Pick<TMDBParams, 'region' | 'language' | 'page'>>>
+  (ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_TOP_RATED), function* (action) {
+    try {
+      //@ts-ignore
+      const response = yield call(() => Promise.resolve(TmdbService.getMoviesTopRated(action.payload)));
+
+      if (response?.status === 200) {
+        yield all([
+          put({
+            type: ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_TOP_RATED),
+            payload: {
+              ...response?.data,
+            }
+          })
+        ])
+      } else {
+        yield put({
+          type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_TOP_RATED),
+          payload: [],
+        })
+      }
+    } catch (err) {
+      yield put({
+        type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_TOP_RATED),
+        payload: [],
+      })
+    }
+  })
+}
+export function* getMovieNowPlayingScroll() {
+  yield takeEvery<ActionRedux<Pick<TMDBParams, 'region' | 'language' | 'page'>>>
+  (ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_NOW_PLAYING), function* (action) {
+    try {
+      //@ts-ignore
+      const response = yield call(() => Promise.resolve(TmdbService.getMoviesNowPlaying(action.payload)));
+
+      if (response?.status === 200) {
+        yield all([
+          put({
+            type: ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_NOW_PLAYING),
+            payload: {
+              ...response?.data,
+            }
+          })
+        ])
+      } else {
+        yield put({
+          type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_NOW_PLAYING),
+          payload: [],
+        })
+      }
+    } catch (err) {
+      yield put({
+        type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_NOW_PLAYING),
+        payload: [],
+      })
+    }
+  })
+}
+export function* getMovieTrendsScroll() {
+  yield takeEvery<ActionRedux<{ timeWindow: 'day' | 'week', language: TMDBParams['language'] }>>
+  (ACT_REQUEST_SCROLL(TMDB_GET_MOVIE_TREND), function* (action) {
+    try {
+      //@ts-ignore
+      const response = yield call(() => Promise.resolve(TmdbService.getTrendMovie(action.payload.timeWindow, action.payload?.language ?? 'en-US')));
+
+      if (response?.status === 200) {
+        yield all([
+          put({
+            type: ACT_SUCCESS_SCROLL(TMDB_GET_MOVIE_TREND),
+            payload: {
+              ...response?.data,
+            }
+          })
+        ])
+      } else {
+        yield put({
+          type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_TREND),
+          payload: [],
+        })
+      }
+    } catch (err) {
+      yield put({
+        type: ACT_FAILURE_SCROLL(TMDB_GET_MOVIE_TREND),
+        payload: [],
+      })
+    }
+  })
+}
+
+
 export function* getMovieDetail(){
   yield takeEvery<ActionRedux<MovieDetailDTO & { params?: Pick<TMDBParams, "include_image_language" | "language">}>>(
     ACT_REQUEST(TMDB_GET_DETAIL_MOVIE),
@@ -338,5 +497,10 @@ export default function* rootSaga() {
     fork(getMovieDetail),
     fork(getMovieImages),
     fork(getMovieRecommendations),
+    fork(getMoviePopularScroll),
+    fork(getMovieUpcomingScroll),
+    fork(getMovieTopRatedScroll),
+    fork(getMovieNowPlayingScroll),
+    fork(getMovieTrendsScroll),
   ])
 }
